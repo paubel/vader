@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Väderdashboard — Malmö</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 id="titleText">Väderdashboard</h1>
+    <div class="header-weather" id="headerWeather" style="display: none;">
+      <div id="headerWeatherContent"></div>
+      <div id="headerPollenContent"></div>
+    </div>
+    <div class="controls">
+      <input id="searchInput" placeholder="Sök stad (valfritt)" />
+      <button id="searchBtn">Sök</button>
+      <button id="locBtn" title="Använd min plats">Min plats</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid">
+      <div class="card current" id="currentCard">
+        <h2>Nuvarande väder</h2>
+        <div id="currentContent">Läser in väder…</div>
+        <div class="current-pollen" id="currentPollenSection">
+          <h3>Pollenprognos</h3>
+          <div id="currentPollenList">Läser in pollen…</div>
+        </div>
+      </div>
+
+      <div class="card chart" id="chartCard">
+        <h2>Temperatur och nederbörd</h2>
+        <div class="chart-stack">
+          <div class="chart-block">
+            <h3>Temperatur</h3>
+            <canvas id="tempChart" height="160"></canvas>
+          </div>
+          <div class="chart-block">
+            <h3>Nederbörd</h3>
+            <canvas id="precipChart" height="140"></canvas>
+          </div>
+          <div class="chart-block">
+            <h3>Vind</h3>
+            <canvas id="windChart" height="140"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card map" id="mapCard">
+        <h2>Regnradar</h2>
+        <div id="radarControls" style="margin-bottom: 10px; display: none;">
+          <div style="margin-bottom: 8px;">
+            <button id="radarPlayBtn" style="padding: 6px 12px; font-size: 0.95em; cursor: pointer;">▶ Spela</button>
+            <label style="margin-left: 12px;">Regnanimation (se hur regnet rör sig): </label>
+          </div>
+          <input type="range" id="radarSlider" min="0" max="100" value="100" style="width: 100%;">
+          <div style="font-size: 0.9em; color: #666; margin-top: 4px;">
+            <span id="radarTime">—</span>
+          </div>
+        </div>
+        <div id="map" style="height: 320px;"></div>
+      </div>
+
+      <div class="card pollen" id="pollenCard">
+        <h2>3-dygnsprognos pollen</h2>
+        <div id="pollenList">Läser in pollen…</div>
+      </div>
+
+      <div class="card forecast" id="forecastCard">
+        <h2>5-dygnsprognos</h2>
+        <div id="forecastList">Läser in prognos…</div>
+      </div>
+
+      <div class="card windy" id="windyCard">
+        <h2>Windy radar</h2>
+        <iframe
+          class="windy-frame"
+          title="Windy radar"
+          src="https://embed.windy.com/embed2.html?lat=55.605&lon=13.0038&detailLat=55.605&detailLon=13.0038&zoom=7&level=surface&overlay=radar&product=radar&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&metricWind=default&metricTemp=default"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Data: Open-Meteo · RainViewer · Pollenrapporten</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
